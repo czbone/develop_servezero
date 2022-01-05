@@ -75,6 +75,12 @@
       shell:
         cmd: 'pip3 install docker-compose'
 
+    - name: Install web application base(Go, Sqlite3)
+      dnf:
+        name:
+          - golang
+          - sqlite
+
     #
     # WWW共通ディレクトリ作成
     #
