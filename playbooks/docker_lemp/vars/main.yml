@@ -1,5 +1,5 @@
 #
-# Docker host configuration
+# ServeZero system configuration
 #
 # server timezone
 ntp_timezone: Asia/Tokyo
@@ -18,3 +18,6 @@ php_fpm_start_servers: 5
 php_fpm_min_spare_servers: 5
 php_fpm_max_spare_servers: 10
 php_fpm_max_requests: 100
+
+# ServeZero configuration
+servezero_app_port: 8080
