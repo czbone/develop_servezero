@@ -18,7 +18,7 @@ readonly APP_NAME="servezero"
 readonly GITHUB_USER="czbone"
 readonly GITHUB_REPO="develop_servezero"
 readonly REPO_DIR=/usr/local/${APP_NAME}/repo
-readonly PLAYBOOK="docker_lemp"
+readonly PLAYBOOK="build_servezero"
 
 # check root user
 readonly USERID=`id | sed 's/uid=\([0-9]*\)(.*/\1/'`
