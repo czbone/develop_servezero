@@ -1,20 +1,28 @@
-- name: Get download url
-  shell: curl -s "https://api.github.com/repos/{{ servezero_app_github_user }}/{{ servezero_app_github_repo }}/tags" | grep "tarball_url" | sed -n '/[ \t]*"tarball_url"/p' | head -n 1 | sed -e 's/[ \t]*".*":[ \t]*"\(.*\)".*/\1/'
-  register: app_archive_url
+# - name: Get download url
+#   shell: curl -sS "https://api.github.com/repos/{{ servezero_app_github_user }}/{{ servezero_app_github_repo }}/tags" | grep "tarball_url" | sed -n '/[ \t]*"tarball_url"/p' | head -n 1 | sed -e 's/[ \t]*".*":[ \t]*"\(.*\)".*/\1/'
+#   register: app_archive_url
   
-- fail:
-    msg: "GitHub archive has No tags"
-  when: app_archive_url.stdout == ""
+# - fail:
+#     msg: "GitHub archive has No tags"
+#   when: app_archive_url.stdout == ""
 
-- name: Download archive
-  unarchive:
-    src: "{{ app_archive_url.stdout }}"
-    dest: "{{ servezero_app_path | dirname }}"
-    remote_src: yes
-  when: app_archive_url.stdout is defined
+# - name: Download archive
+#   unarchive:
+#     src: "{{ app_archive_url.stdout }}"
+#     dest: "{{ servezero_app_path | dirname }}"
+#     remote_src: yes
+#   when: app_archive_url.stdout is defined
 
 # - name: Remove directory
 #   shell: rm -rf "{{ servezero_app_path }}"
 #   when: app_archive_url.stdout is defined
 
+- name: Fetch rustup
+  uri:
+    url: https://api.github.com/repos/{{ servezero_app_github_user }}/{{ servezero_app_github_repo }}/tags
+    return_content: yes
+  register: return_from_shell
 
+- name: show previous shell stdout
+  debug:
+    msg: "{{ return_from_shell.stdout }}"
