@@ -20,17 +20,3 @@
   args:
     chdir: "{{ servezero_app_download_path }}/{{ servezero_app_github_repo }}"
   when: app_archive_url.stdout is defined
-
-# - name: Remove directory
-#   shell: rm -rf "{{ servezero_app_path }}"
-#   when: app_archive_url.stdout is defined
-
-# - name: Fetch rustup
-#   uri:
-#     url: https://api.github.com/repos/{{ servezero_app_github_user }}/{{ servezero_app_github_repo }}/tags
-#     return_content: yes
-#   register: return_from_shell
-
-# - name: show previous shell stdout
-#   debug:
-#     msg: "{{ return_from_shell.stdout }}"
