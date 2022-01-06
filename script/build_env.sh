@@ -78,7 +78,6 @@ echo "########################################################################"
 
 # Prepare work directory
 work_dir=$(mktemp -d -t ${APP_NAME}-XXXXXXXXXX)
-echo $work_dir
 
 # Get test mode
 if [ "$1" == '-test' ]; then
@@ -127,8 +126,6 @@ filename=${GITHUB_REPO}_${version}.tar.gz
 filepath=$work_dir/$filename
 
 # Set current directory at work directory
-#rm -rf $work_dir
-#mkdir -p $work_dir
 cd $work_dir
 savefilelist=`ls -1`
 
