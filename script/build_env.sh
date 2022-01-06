@@ -2,21 +2,22 @@
 # 
 # Script Name: build_env.sh
 #
-# Version:      1.0.0
+# Version:      1.1.0
 # Author:       Naoki Hirata
-# Date:         2021-10-22
+# Date:         2022-01-06
 # Usage:        build_env.sh [-test]
 # Options:      -test      test mode execution with the latest source package
 # Description:  This script builds LEMP environment on Docker server with the one-liner command.
 # Version History:
 #               1.0.0  (2021-10-22) initial version
+#               1.1.0  (2022-01-06) use dynamic working directory
 # License:      MIT License
 
 # Define macro parameter
+readonly APP_NAME="servezero"
 readonly GITHUB_USER="czbone"
 readonly GITHUB_REPO="develop_servezero"
 readonly REPO_DIR=/root/ansible/${GITHUB_REPO}
-readonly WORK_DIR=/root/ansible/_work
 readonly PLAYBOOK="docker_lemp"
 
 # check root user
@@ -75,6 +76,10 @@ echo "# $DIST_NAME"
 echo "# START BUILDING ENVIRONMENT"
 echo "########################################################################"
 
+# Prepare work directory
+work_dir=$(mktemp -d -t ${APP_NAME}-XXXXXXXXXX)
+echo $work_dir
+
 # Get test mode
 if [ "$1" == '-test' ]; then
     readonly TEST_MODE="true"
@@ -119,12 +124,12 @@ else
     version=`basename $url | sed -e 's/v\([0-9\.]*\)/\1/'`
 fi
 filename=${GITHUB_REPO}_${version}.tar.gz
-filepath=${WORK_DIR}/$filename
+filepath=$work_dir/$filename
 
 # Set current directory at work directory
-rm -rf ${WORK_DIR}
-mkdir -p ${WORK_DIR}
-cd ${WORK_DIR}
+rm -rf $work_dir
+mkdir -p $work_dir
+cd $work_dir
 savefilelist=`ls -1`
 
 # Download archived repository
@@ -151,8 +156,8 @@ mv ${destdirname} ${GITHUB_REPO}
 echo ${filename}" unarchived"
 
 # launch ansible
-mv ${WORK_DIR}/${GITHUB_REPO} ${REPO_DIR}
+mv $work_dir/${GITHUB_REPO} ${REPO_DIR}
 cd ${REPO_DIR}/playbooks/${PLAYBOOK}
-rm -rf ${WORK_DIR}
+rm -rf $work_dir
 ansible-galaxy install --role-file=requirements.yml --roles-path=/etc/ansible/roles --force
 ansible-playbook -i localhost, main.yml
