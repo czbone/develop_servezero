@@ -2,9 +2,9 @@
   shell: curl -sS "https://api.github.com/repos/{{ servezero_app_github_user }}/{{ servezero_app_github_repo }}/tags" | grep "tarball_url" | sed -n '/[ \t]*"tarball_url"/p' | head -n 1 | sed -e 's/[ \t]*".*":[ \t]*"\(.*\)".*/\1/'
   register: app_archive_url
   
-- fail:
-    msg: "GitHub archive has No tags"
-  when: app_archive_url.stdout == ""
+# - fail:
+#     msg: "GitHub archive has No tags"
+#   when: app_archive_url.stdout == ""
 
 - name: Download archive
   unarchive:
