@@ -17,7 +17,7 @@
 readonly APP_NAME="servezero"
 readonly GITHUB_USER="czbone"
 readonly GITHUB_REPO="develop_servezero"
-readonly REPO_DIR=/root/ansible/${GITHUB_REPO}
+readonly REPO_DIR=/usr/local/${APP_NAME}/repo
 readonly PLAYBOOK="docker_lemp"
 
 # check root user
@@ -156,8 +156,9 @@ mv ${destdirname} ${GITHUB_REPO}
 echo ${filename}" unarchived"
 
 # launch ansible
+mkdir -p ${REPO_DIR}
 mv $work_dir/${GITHUB_REPO} ${REPO_DIR}
-cd ${REPO_DIR}/playbooks/${PLAYBOOK}
+cd ${REPO_DIR}/${GITHUB_REPO}/playbooks/${PLAYBOOK}
 rm -rf $work_dir
 ansible-galaxy install --role-file=requirements.yml --roles-path=/etc/ansible/roles --force
 ansible-playbook -i localhost, main.yml
