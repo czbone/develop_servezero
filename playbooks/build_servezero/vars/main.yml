@@ -21,3 +21,6 @@ php_fpm_max_requests: 100
 
 # ServeZero configuration
 servezero_app_port: 8080
+servezero_app_path: /usr/local/servezero/repo
+servezero_app_github_user: czbone
+servezero_app_github_repo: develop_servezero_app
