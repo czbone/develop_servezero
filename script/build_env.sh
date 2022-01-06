@@ -127,8 +127,8 @@ filename=${GITHUB_REPO}_${version}.tar.gz
 filepath=$work_dir/$filename
 
 # Set current directory at work directory
-rm -rf $work_dir
-mkdir -p $work_dir
+#rm -rf $work_dir
+#mkdir -p $work_dir
 cd $work_dir
 savefilelist=`ls -1`
 
