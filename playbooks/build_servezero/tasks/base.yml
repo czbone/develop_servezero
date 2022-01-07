@@ -36,6 +36,7 @@
     name:
       - golang
       - sqlite
+      - make
 
 #
 # WWW共通ディレクトリ作成
