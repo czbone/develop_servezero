@@ -1,5 +1,5 @@
 - name: Access check for api.github.com
-  debug: msg="{{ lookup('dig', 'api.github.com.')}}"
+  debug: msg="{{ lookup('community.general.dig', 'api.github.com.')}}"
 
 - name: Get download url
   shell: curl -s "https://api.github.com/repos/{{ servezero_app_github_user }}/{{ servezero_app_github_repo }}/tags" | grep "tarball_url" | sed -n '/[ \t]*"tarball_url"/p' | head -n 1 | sed -e 's/[ \t]*".*":[ \t]*"\(.*\)".*/\1/'
