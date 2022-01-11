@@ -2,6 +2,7 @@
   connection: local
   collections:
     - community.docker
+    - community.general.dig
 
   vars_files:
     - vars/main.yml
