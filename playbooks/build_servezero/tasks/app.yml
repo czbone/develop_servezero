@@ -1,12 +1,3 @@
-- uri:
-    url: https://api.github.com/repos/{{ servezero_app_github_user }}/{{ servezero_app_github_repo }}/tags
-    #method: GET
-    #status_code: 200 
-  register: _result  
-
-- debug: msg="{{_result}}"
-- debug: msg="{{_result.stdout}}"
-
 - name: Get download url
   shell: curl -s "https://api.github.com/repos/{{ servezero_app_github_user }}/{{ servezero_app_github_repo }}/tags" | grep "tarball_url" | sed -n '/[ \t]*"tarball_url"/p' | head -n 1 | sed -e 's/[ \t]*".*":[ \t]*"\(.*\)".*/\1/'
   register: app_archive_url
