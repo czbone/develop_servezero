@@ -4,4 +4,3 @@ roles:
   
 collections:
   - community.docker
-  - community.general
