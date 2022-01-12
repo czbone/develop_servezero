@@ -254,3 +254,9 @@
     state: restarted
     daemon_reload: yes
     enabled: yes
+- firewalld:
+    port: 8080/tcp
+    permanent: yes
+    state: enabled
+- name: Restart firewalld
+  service: name=firewalld state=restarted enabled=yes
