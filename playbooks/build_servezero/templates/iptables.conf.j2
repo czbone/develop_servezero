@@ -21,7 +21,7 @@
 # ALLOW something
 -A FILTERS -p tcp --dport {{ ssh_port }} -m conntrack --ctstate NEW,ESTABLISHED -j ACCEPT
 -A FILTERS -p tcp -m multiport --dports 80,443 -m conntrack --ctstate NEW,ESTABLISHED -j ACCEPT
--A FILTERS -p tcp --dport {{ servezero_app_port }} -m conntrack --ctstate NEW,ESTABLISHED -j ACCEPT
+#-A FILTERS -p tcp --dport {{ servezero_app_port }} -m conntrack --ctstate NEW,ESTABLISHED -j ACCEPT
 
 # DENY something
 -A FILTERS -p icmp --icmp-type echo-request -j REJECT
