@@ -244,16 +244,16 @@
 #
 # ファイアウォールの設定
 #
-- name: Copy firewall configration file
-  template: src=iptables.conf.j2 dest=/etc/sysconfig/iptables.conf
-- name: Create firewall
-  template: src=iptables.service.j2 dest=/lib/systemd/system/iptables.service mode=644
-- name: Start firewall
-  systemd:
-    name: iptables
-    state: restarted
-    daemon_reload: yes
-    enabled: yes
+# - name: Copy firewall configration file
+#   template: src=iptables.conf.j2 dest=/etc/sysconfig/iptables.conf
+# - name: Create firewall
+#   template: src=iptables.service.j2 dest=/lib/systemd/system/iptables.service mode=644
+# - name: Start firewall
+#   systemd:
+#     name: iptables
+#     state: restarted
+#     daemon_reload: yes
+#     enabled: yes
 - firewalld:
     port: 8080/tcp
     permanent: yes
