@@ -260,7 +260,5 @@
     port: '{{ servezero_app_port }}/tcp'
     permanent: yes
     state: enabled
-- name: Restart Docker service
-  service: name=docker state=restarted enabled=yes
 - name: Restart Firewalld service
   service: name=firewalld state=restarted enabled=yes
