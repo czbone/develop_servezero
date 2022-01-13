@@ -256,6 +256,7 @@
 #     enabled: yes
 - name: Open 8080/tcp port for ServeZero web application
   firewalld:
+    zone: public
     port: '{{ servezero_app_port }}/tcp'
     permanent: yes
     state: enabled
