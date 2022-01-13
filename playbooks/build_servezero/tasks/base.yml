@@ -255,7 +255,7 @@
 #     daemon_reload: yes
 #     enabled: yes
 - firewalld:
-    port: 8080/tcp
+    port: '{{ servezero_app_port }}/tcp'
     permanent: yes
     state: enabled
 - name: Restart firewalld
