@@ -254,9 +254,12 @@
 #     state: restarted
 #     daemon_reload: yes
 #     enabled: yes
-- firewalld:
+- name: Open 8080/tcp port for ServeZero web application
+  firewalld:
     port: '{{ servezero_app_port }}/tcp'
     permanent: yes
     state: enabled
-- name: Restart firewalld
+- name: Restart Docker service
+  service: name=docker state=restarted enabled=yes
+- name: Restart Firewalld service
   service: name=firewalld state=restarted enabled=yes
