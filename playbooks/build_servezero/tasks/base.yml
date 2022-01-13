@@ -73,7 +73,8 @@
 - name: Create default site configuration
   template: src='./container/nginx/templates/default.conf.j2' dest='{{ servezero_path }}/{{ servezero_share_volume }}/nginx/conf.d/default.conf' owner=root group=root mode=0644
 - name: Configure Nginx log rotation
-  copy: src="./container/nginx/files/logrotate_nginx" dest="/etc/logrotate.d/docker-nginx" owner=root group=root mode=0644
+  #copy: src="./container/nginx/files/logrotate_nginx" dest="/etc/logrotate.d/docker-nginx" owner=root group=root mode=0644
+  template: src='./container/nginx/templates/logrotate_nginx.j2' dest='/etc/logrotate.d/docker-nginx' owner=root group=root mode=0644
 
 #
 # PHP用設定ファイル作成

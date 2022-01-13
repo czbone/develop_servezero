@@ -17,7 +17,7 @@
     ssl_csr_common_name: '{{ default_domain_name }}'
 
     # Dockerホスト用ディレクトリ
-    www_document_root: '/docker/public_html' # WWWドキュメントルート
+    www_document_root: '{{ servezero_path }}/{{ servezero_share_volume }}/public_html' # WWWドキュメントルート
     
     # サンプルプログラム用
     db_host: 'db'
