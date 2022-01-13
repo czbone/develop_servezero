@@ -46,6 +46,9 @@
 #
 - name: Create system install directory
   file: path='{{ servezero_path }}/{{ servezero_share_volume }}' state=directory owner=root group=root mode=0755
+- name: Create system log directory
+  file: path='{{ servezero_path }}/{{ servezero_share_volume }}/log' state=directory owner=root group=root mode=0755
+- file: src='{{ servezero_path }}/{{ servezero_share_volume }}/log' dest='/var/log/{{ servezero_system_name }}' state=link
 
 #
 # WWW共通ディレクトリ作成
@@ -188,8 +191,6 @@
     recreate: yes
     state: started
     restart_policy: always
-#        ports: 9000:9000
-#        exposed_ports: 9000
     networks:
       - name: local-network
     log_driver: journald
@@ -236,9 +237,6 @@
     ports:
       - 80:80
       - 443:443
-    # exposed_ports: 
-    #   - "80"
-    #   - "443"
     networks:
       - name: local-network
     log_driver: journald

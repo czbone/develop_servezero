@@ -20,6 +20,7 @@ php_fpm_max_spare_servers: 10
 php_fpm_max_requests: 100
 
 # ServeZero configuration
+servezero_system_name: servezero
 servezero_path: /usr/local/servezero
 servezero_share_volume: volumes
 servezero_app_port: 8080
