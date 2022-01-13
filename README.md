@@ -20,7 +20,8 @@ WordPressなどの「スクリプト言語+DB」タイプのCMSの対応が初�
 [![MIT license](https://img.shields.io/badge/License-MIT-blue.svg)](https://lbesson.mit-license.org/)
 
 # インストール
-新規にOSをインストールしたサーバに`root`でログインし、以下の１行のコマンドをそのままコピーして実行します。
+新規にOSをインストールしたサーバに`root`でログインし、以下の１行のコマンドをそのままコピーして実行します。  
+インストール完了後、サーバを再起動します。
 
 ## 実行コマンド
 ```
