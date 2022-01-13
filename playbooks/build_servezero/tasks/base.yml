@@ -1,3 +1,6 @@
+##########################################
+# ServeZeroベースシステム構築
+##########################################
 - name: Install minimal command
   dnf:
     name:
@@ -39,6 +42,12 @@
       - make
 
 #
+# ServeZeroシステム配置ディレクトリ作成
+#
+- name: Create system install directory
+  file: path='{{ servezero_path }}/{{ servezero_share_volume }}' state=directory owner=root group=root mode=0755
+
+#
 # WWW共通ディレクトリ作成
 #
 - name: Create www directory
@@ -48,21 +57,21 @@
 # MariaDB用設定ファイル作成
 #
 - name: Create MariaDB data directory
-  file: path='/docker/mariadb/data' state=directory owner=root group=root mode=0755
+  file: path='{{ servezero_path }}/{{ servezero_share_volume }}/mariadb/data' state=directory owner=root group=root mode=0755
 - name: Copy MariaDB conf file
-  copy: src='./container/db/files/custom.cnf' dest='/docker/mariadb/custom.cnf' owner=root group=root mode=0644
+  copy: src='./container/db/files/custom.cnf' dest='{{ servezero_path }}/{{ servezero_share_volume }}/mariadb/custom.cnf' owner=root group=root mode=0644
 
 #
 # Nginx用設定ファイル作成
 #
 - name: Create Nginx conf directory
-  file: path='/docker/nginx/conf.d' state=directory owner=root group=root mode=0755
+  file: path='{{ servezero_path }}/{{ servezero_share_volume }}/nginx/conf.d' state=directory owner=root group=root mode=0755
 - name: Create multi domain site directory
-  file: path='/docker/nginx/sites-available' state=directory owner=root group=root mode=0755
+  file: path='{{ servezero_path }}/{{ servezero_share_volume }}/nginx/sites-available' state=directory owner=root group=root mode=0755
 - name: Copy nginx.conf
-  copy: src='./container/nginx/files/nginx.conf' dest='/docker/nginx/nginx.conf' owner=root group=root mode=0644
+  copy: src='./container/nginx/files/nginx.conf' dest='{{ servezero_path }}/{{ servezero_share_volume }}/nginx/nginx.conf' owner=root group=root mode=0644
 - name: Create default site configuration
-  template: src='./container/nginx/templates/default.conf.j2' dest='/docker/nginx/conf.d/default.conf' owner=root group=root mode=0644
+  template: src='./container/nginx/templates/default.conf.j2' dest='{{ servezero_path }}/{{ servezero_share_volume }}/nginx/conf.d/default.conf' owner=root group=root mode=0644
 - name: Configure Nginx log rotation
   copy: src="./container/nginx/files/logrotate_nginx" dest="/etc/logrotate.d/docker-nginx" owner=root group=root mode=0644
 
@@ -70,13 +79,13 @@
 # PHP用設定ファイル作成
 #
 - name: Create PHP conf directory
-  file: path='/docker/php' state=directory owner=root group=root mode=0755
+  file: path='{{ servezero_path }}/{{ servezero_share_volume }}/php' state=directory owner=root group=root mode=0755
 - name: Copy php.ini
-  copy: src='./container/php/files/php.ini' dest='/docker/php/php.ini' owner=root group=root mode=0644
+  copy: src='./container/php/files/php.ini' dest='{{ servezero_path }}/{{ servezero_share_volume }}/php/php.ini' owner=root group=root mode=0644
 - name: Create PHP-FPM conf directory
-  file: path='/docker/php/php-fpm.d' state=directory owner=root group=root mode=0755
+  file: path='{{ servezero_path }}/{{ servezero_share_volume }}/php/php-fpm.d' state=directory owner=root group=root mode=0755
 - name: Create PHP-FPM configuration
-  template: src='./container/php/templates/www.conf.j2' dest='/docker/php/php-fpm.d/www.conf' owner=root group=root mode=0644
+  template: src='./container/php/templates/www.conf.j2' dest='{{ servezero_path }}/{{ servezero_share_volume }}/php/php-fpm.d/www.conf' owner=root group=root mode=0644
 - name: Create sample PHP directory
   file: path='{{ www_document_root }}/_sample' state=directory owner=root group=root mode=0755
 
@@ -142,8 +151,8 @@
     log_options:
       tag: "{{ '{{' }}.ImageName{{ '}}' }}/{{ '{{' }}.Name{{ '}}' }}/{{ '{{' }}.ID{{ '}}' }}"
     volumes:
-      - '/docker/mariadb/data:/var/lib/mysql'
-      - '/docker/mariadb/custom.cnf:/etc/mysql/conf.d/custom.cnf:ro'
+      - '{{ servezero_path }}/{{ servezero_share_volume }}/mariadb/data:/var/lib/mysql'
+      - '{{ servezero_path }}/{{ servezero_share_volume }}/mariadb/custom.cnf:/etc/mysql/conf.d/custom.cnf:ro'
   
 #
 # PHPコンテナ作成
@@ -187,8 +196,8 @@
       tag: "{{ '{{' }}.ImageName{{ '}}' }}/{{ '{{' }}.Name{{ '}}' }}/{{ '{{' }}.ID{{ '}}' }}"
     volumes:
       - '{{ www_document_root }}:/var/www/html:ro'   # www directory
-      - '/docker/php/php.ini:/usr/local/etc/php/conf.d/my.ini:ro'
-      - '/docker/php/php-fpm.d/www.conf:/usr/local/etc/php-fpm.d/www.conf:ro'
+      - '{{ servezero_path }}/{{ servezero_share_volume }}/php/php.ini:/usr/local/etc/php/conf.d/my.ini:ro'
+      - '{{ servezero_path }}/{{ servezero_share_volume }}/php/php-fpm.d/www.conf:/usr/local/etc/php-fpm.d/www.conf:ro'
 
 #
 # Nginxコンテナ作成
@@ -236,10 +245,10 @@
       tag: "{{ '{{' }}.ImageName{{ '}}' }}/{{ '{{' }}.Name{{ '}}' }}/{{ '{{' }}.ID{{ '}}' }}"
     volumes:
       - '{{ www_document_root }}:/var/www/html:ro'   # www directory
-      - '/docker/log/nginx:/var/log/nginx' # log directroy
-      - '/docker/nginx/nginx.conf:/etc/nginx/nginx.conf:ro'
-      - '/docker/nginx/conf.d:/etc/nginx/conf.d:ro'
-      - '/docker/nginx/sites-available:/etc/nginx/sites-available:ro'
+      - '{{ servezero_path }}/{{ servezero_share_volume }}/log/nginx:/var/log/nginx' # log directroy
+      - '{{ servezero_path }}/{{ servezero_share_volume }}/nginx/nginx.conf:/etc/nginx/nginx.conf:ro'
+      - '{{ servezero_path }}/{{ servezero_share_volume }}/nginx/conf.d:/etc/nginx/conf.d:ro'
+      - '{{ servezero_path }}/{{ servezero_share_volume }}/nginx/sites-available:/etc/nginx/sites-available:ro'
 
 #
 # ファイアウォールの設定
