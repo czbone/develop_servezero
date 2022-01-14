@@ -19,15 +19,15 @@ WordPressなどの「スクリプト言語+DB」タイプのCMSの対応が初�
 
 [![MIT license](https://img.shields.io/badge/License-MIT-blue.svg)](https://lbesson.mit-license.org/)
 
-# インストール
+## インストール
 新規にOSをインストールしたサーバに`root`でログインし、以下の１行のコマンドをそのままコピーして実行します。  
 インストール完了後、サーバを再起動します。
 
-## 実行コマンド
+### 実行コマンド
 ```
 curl https://raw.githubusercontent.com/czbone/develop_servezero/master/script/build_env.sh | bash
 ```
 
-# 関連プロジェクト
+## 関連プロジェクト
 
 - システム管理用Webアプリケーション(https://github.com/czbone/develop_servezero_app )
