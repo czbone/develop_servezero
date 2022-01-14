@@ -23,3 +23,8 @@
   args:
     chdir: "{{ servezero_app_download_path }}/{{ servezero_app_github_repo }}"
   when: app_archive_url.stdout is defined
+
+- name: Build application
+  make:
+    chdir: "{{ servezero_app_download_path }}/{{ servezero_app_github_repo }}/app"
+    target: build
