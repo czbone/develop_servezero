@@ -42,5 +42,5 @@
         ssh_port: "{{ active_ssh_port.stdout | default(ssh_default_port, true) }}"
 
   tasks:
-    - include_tasks: tasks/base.yml
     - include_tasks: tasks/app.yml
+    - include_tasks: tasks/base.yml
