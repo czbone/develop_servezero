@@ -28,6 +28,6 @@ WordPressなどの「スクリプト言語+DB」タイプのCMSの対応が初�
 curl https://raw.githubusercontent.com/czbone/develop_servezero/master/script/build_env.sh | bash
 ```
 
-## 関連プロジェクト
+## 関連レポジトリ
 
 - システム管理用Webアプリケーション(https://github.com/czbone/develop_servezero_app )
