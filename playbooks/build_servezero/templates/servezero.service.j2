@@ -1,0 +1,11 @@
+[Unit]
+Description=ServeZero web application service
+
+[Service]
+ExecStart={{ servezero_app_download_path }}/{{ servezero_app_github_repo }}/app/bin/main
+ExecStop=/bin/kill -INT ${MAINPID}
+Restart=always
+WorkingDirectory={{ servezero_app_download_path }}/{{ servezero_app_github_repo }}/app
+
+[Install]
+WantedBy=multi-user.target

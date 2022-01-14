@@ -28,3 +28,12 @@
   make:
     chdir: "{{ servezero_app_download_path }}/{{ servezero_app_github_repo }}/app"
     target: build
+
+- name: Create ServeZero service
+  template: src={{ servezero_system_name }}.service.j2 dest=/lib/systemd/system/{{ servezero_system_name }}.service mode=644
+- name: Start ServeZero service
+  systemd:
+    name: '{{ servezero_system_name }}'
+    state: restarted
+    daemon_reload: yes
+    enabled: yes
