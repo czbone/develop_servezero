@@ -43,6 +43,9 @@
 - name: Initialize web application db
   copy: src='{{ servezero_app_download_path }}/{{ servezero_app_github_repo }}/{{ servezero_app_install_db_path }}' dest='{{ servezero_config_path }}/{{ servezero_app_db_name }}' force=no
 
+- name: Make log directory symbolic link
+  file: src='{{ servezero_app_download_path }}/{{ servezero_app_github_repo }}/app/log' dest='/var/log/{{ servezero_system_name }}/app' state=link
+
 - name: Create ServeZero service
   template: src={{ servezero_system_name }}.service.j2 dest=/lib/systemd/system/{{ servezero_system_name }}.service mode=644
 - name: Start ServeZero service
