@@ -38,6 +38,11 @@
     chdir: "{{ servezero_app_download_path }}/{{ servezero_app_github_repo }}/app"
     target: build
 
+- name: Create web application config directory
+  file: path='{{ servezero_config_path }}' state=directory owner=root group=root mode=0755
+- name: Initialize web application db
+  copy: src='{{ servezero_app_download_path }}/{{ servezero_app_github_repo }}/{{ servezero_app_install_db_path }}' dest='{{ servezero_config_path }}/{{ servezero_app_db_name }}' force=no
+
 - name: Create ServeZero service
   template: src={{ servezero_system_name }}.service.j2 dest=/lib/systemd/system/{{ servezero_system_name }}.service mode=644
 - name: Start ServeZero service
@@ -46,8 +51,3 @@
     state: restarted
     daemon_reload: yes
     enabled: yes
-
-- name: Create web application config directory
-  file: path='{{ servezero_config_path }}' state=directory owner=root group=root mode=0755
-- name: Initialize web application db
-  copy: src='{{ servezero_app_download_path }}/{{ servezero_app_github_repo }}/{{ servezero_app_install_db_path }}' dest='{{ servezero_config_path }}/{{ servezero_app_db_name }}' force=no
