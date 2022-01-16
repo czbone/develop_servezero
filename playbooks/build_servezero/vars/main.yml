@@ -21,6 +21,7 @@ php_fpm_max_requests: 100
 
 # ServeZero configuration
 servezero_system_name: servezero
+servezero_system_app_name: servezero-app
 servezero_path: /usr/local/servezero
 servezero_config_path: /usr/local/servezero/config
 servezero_share_volume: volumes
