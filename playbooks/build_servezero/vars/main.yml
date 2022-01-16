@@ -22,8 +22,11 @@ php_fpm_max_requests: 100
 # ServeZero configuration
 servezero_system_name: servezero
 servezero_path: /usr/local/servezero
+servezero_config_path: /usr/local/servezero/config
 servezero_share_volume: volumes
 servezero_app_port: 8080
+servezero_app_db_name: zero.sqlite3
+servezero_app_install_db_path: app/install/init.sqlite3
 servezero_app_download_path: /usr/local/servezero/repo
 servezero_app_github_user: czbone
 servezero_app_github_repo: develop_servezero_app
