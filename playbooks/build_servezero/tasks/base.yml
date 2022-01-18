@@ -64,8 +64,8 @@
   file: path='{{ servezero_path }}/{{ servezero_share_volume }}/nginx/conf.d' state=directory owner=root group=root mode=0755
 - name: Create multi domain site config directory
   file: path='{{ servezero_path }}/{{ servezero_share_volume }}/nginx/sites-available' state=directory owner=root group=root mode=0755
-- name: Create multi domain home directory
-  file: path='{{ servezero_path }}/{{ servezero_share_volume }}/nginx/home' state=directory owner=root group=root mode=0755
+- name: Create virtual host home directory
+  file: path='{{ servezero_path }}/{{ servezero_share_volume }}/nginx/vhost' state=directory owner=root group=root mode=0755
 - name: Copy nginx.conf
   copy: src='./container/nginx/files/nginx.conf' dest='{{ servezero_path }}/{{ servezero_share_volume }}/nginx/nginx.conf' owner=root group=root mode=0644
 - name: Create default site configuration
