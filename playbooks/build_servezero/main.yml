@@ -30,7 +30,7 @@
         
   pre_tasks:
     - selinux: state=disabled
-      become: True
+#      become: True
     - name: Remove Apache package
       dnf:
         name: httpd
