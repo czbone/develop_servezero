@@ -44,10 +44,12 @@
 - file: src='{{ servezero_path }}/{{ servezero_share_volume }}/log' dest='/var/log/{{ servezero_system_name }}' state=link
 
 #
-# WWW共通ディレクトリ作成
+# WWWディレクトリ作成
 #
 - name: Create www directory
   file: path='{{ www_document_root }}' state=directory owner=root group=root mode=0755
+- name: Create virtual host directory
+  file: path='{{ servezero_path }}/{{ servezero_share_volume }}/vhost' state=directory owner=root group=root mode=0755
 
 #
 # MariaDB用設定ファイル作成
@@ -73,6 +75,15 @@
 - name: Configure Nginx log rotation
   #copy: src="./container/nginx/files/logrotate_nginx" dest="/etc/logrotate.d/docker-nginx" owner=root group=root mode=0644
   template: src='./container/nginx/templates/logrotate_nginx.j2' dest='/etc/logrotate.d/docker-nginx' owner=root group=root mode=0644
+
+# copy error page file
+- name: make error page directory
+  file: path='{{ servezero_path }}/{{ servezero_share_volume }}/nginx/html/error' state=directory owner=root group=root mode=0755
+- copy: src='error/forbidden.html' dest='{{ servezero_path }}/{{ servezero_share_volume }}/nginx/html/error/forbidden.html' owner=root group=root mode=0644
+- copy: src='error/internalservererror.html' dest='{{ servezero_path }}/{{ servezero_share_volume }}/nginx/html/error/internalservererror.html' owner=root group=root mode=0644
+- copy: src='error/notfound.html' dest='{{ servezero_path }}/{{ servezero_share_volume }}/nginx/html/error/notfound.html' owner=root group=root mode=0644
+- copy: src='error/unauthorized.html' dest='{{ servezero_path }}/{{ servezero_share_volume }}/nginx/html/error/unauthorized.html' owner=root group=root mode=0644
+- copy: src='error/serviceunavailable.html' dest='{{ servezero_path }}/{{ servezero_share_volume }}/nginx/html/error/serviceunavailable.html' owner=root group=root mode=0644
 
 #
 # PHP用設定ファイル作成
