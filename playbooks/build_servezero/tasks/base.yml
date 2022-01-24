@@ -85,16 +85,16 @@
   file: path='{{ servezero_path }}/{{ servezero_share_volume }}/php/php-fpm.d' state=directory owner=root group=root mode=0755
 - name: Create PHP-FPM configuration
   template: src='./container/php/templates/www.conf.j2' dest='{{ servezero_path }}/{{ servezero_share_volume }}/php/php-fpm.d/www.conf' owner=root group=root mode=0644
-- name: Create sample PHP directory
-  file: path='{{ www_document_root }}/_sample' state=directory owner=root group=root mode=0755
+#- name: Create sample PHP directory
+#  file: path='{{ www_document_root }}/_sample' state=directory owner=root group=root mode=0755
 
-- name: Copy sample PHP scripts
-  template:
-    src: "./container/php/templates/sample/{{ item }}.j2"
-    dest: "{{ www_document_root }}/_sample/{{ item }}"
-  with_items:
-    - index.php
-    - index2.php
+# - name: Copy sample PHP scripts
+#   template:
+#     src: "./container/php/templates/sample/{{ item }}.j2"
+#     dest: "{{ www_document_root }}/_sample/{{ item }}"
+#   with_items:
+#     - index.php
+#     - index2.php
 
 #
 # ネットワーク作成
@@ -195,7 +195,7 @@
       - '{{ www_document_root }}:/var/www/html:ro'   # www directory
       - '{{ servezero_path }}/{{ servezero_share_volume }}/php/php.ini:/usr/local/etc/php/conf.d/my.ini:ro'
       - '{{ servezero_path }}/{{ servezero_share_volume }}/php/php-fpm.d/www.conf:/usr/local/etc/php-fpm.d/www.conf:ro'
-
+      - '{{ servezero_path }}/{{ servezero_share_volume }}/vhost:/var/www/vhost:rw'
 #
 # Nginxコンテナ作成
 #
@@ -243,7 +243,6 @@
       - '{{ servezero_path }}/{{ servezero_share_volume }}/nginx/nginx.conf:/etc/nginx/nginx.conf:ro'
       - '{{ servezero_path }}/{{ servezero_share_volume }}/nginx/conf.d:/etc/nginx/conf.d:ro'
       - '{{ servezero_path }}/{{ servezero_share_volume }}/nginx/sites-available:/etc/nginx/sites-available:ro'
-      - '{{ servezero_path }}/{{ servezero_share_volume }}/nginx/vhost:/var/www/vhost:rw'
 
 #
 # ファイアウォールの設定
