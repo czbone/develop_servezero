@@ -23,23 +23,23 @@ server {
     #}
     error_page 401 /unauthorized.html;
     location = /unauthorized.html {
-        root   /var/www/html/error;
+        root   /var/www/error;
     }
     error_page 403 /forbidden.html;
     location = /forbidden.html {
-        root   /var/www/html/error;
+        root   /var/www/error;
     }
     error_page 404 /notfound.html;
     location = /notfound.html {
-        root   /var/www/html/error;
+        root   /var/www/error;
     }
     error_page   503 /serviceunavailable.html;
     location = /serviceunavailable.html {
-        root   /var/www/html/error;
+        root   /var/www/error;
     }
     error_page   500 502 504  /internalservererror.html;
     location = /internalservererror.html {
-        root   /var/www/html/error;
+        root   /var/www/error;
     }
 
     # pass the PHP scripts to FastCGI server listening

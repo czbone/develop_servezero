@@ -76,14 +76,14 @@
   #copy: src="./container/nginx/files/logrotate_nginx" dest="/etc/logrotate.d/docker-nginx" owner=root group=root mode=0644
   template: src='./container/nginx/templates/logrotate_nginx.j2' dest='/etc/logrotate.d/docker-nginx' owner=root group=root mode=0644
 
-# copy error page file
+# エラーページ
 - name: make error page directory
-  file: path='{{ www_document_root }}/error' state=directory owner=root group=root mode=0755
-- copy: src='error/forbidden.html' dest='{{ www_document_root }}/error/forbidden.html' owner=root group=root mode=0644
-- copy: src='error/internalservererror.html' dest='{{ www_document_root }}/error/internalservererror.html' owner=root group=root mode=0644
-- copy: src='error/notfound.html' dest='{{ www_document_root }}/error/notfound.html' owner=root group=root mode=0644
-- copy: src='error/unauthorized.html' dest='{{ www_document_root }}/error/unauthorized.html' owner=root group=root mode=0644
-- copy: src='error/serviceunavailable.html' dest='{{ www_document_root }}/error/serviceunavailable.html' owner=root group=root mode=0644
+  file: path='/var/www/error' state=directory owner=root group=root mode=0755
+- copy: src='error/forbidden.html' dest='/var/www/error/forbidden.html' owner=root group=root mode=0644
+- copy: src='error/internalservererror.html' dest='/var/www/error/internalservererror.html' owner=root group=root mode=0644
+- copy: src='error/notfound.html' dest='/var/www/error/notfound.html' owner=root group=root mode=0644
+- copy: src='error/unauthorized.html' dest='/var/www/error/unauthorized.html' owner=root group=root mode=0644
+- copy: src='error/serviceunavailable.html' dest='/var/www/error/serviceunavailable.html' owner=root group=root mode=0644
 
 #
 # PHP用設定ファイル作成
