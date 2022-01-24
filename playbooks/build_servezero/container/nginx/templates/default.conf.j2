@@ -2,8 +2,8 @@ server {
     listen 80 default_server;
     listen 443 default_server ssl;
     
-    #server_name _;
-    server_name {{ default_domain_name }};
+    server_name _;
+    #server_name {{ default_domain_name }};
     root /var/www/html;
     index index.php index.html;
 
@@ -17,9 +17,29 @@ server {
 
     # redirect server error pages to the static page /50x.html
     #
-    error_page   500 502 503 504  /50x.html;
-    location = /50x.html {
-        root   /usr/share/nginx/html;
+    #error_page   500 502 503 504  /50x.html;
+    #location = /50x.html {
+    #    root   /usr/share/nginx/html;
+    #}
+    error_page 401 /unauthorized.html;
+    location = /unauthorized.html {
+        root   /var/www/html/error;
+    }
+    error_page 403 /forbidden.html;
+    location = /forbidden.html {
+        root   /var/www/html/error;
+    }
+    error_page 404 /notfound.html;
+    location = /notfound.html {
+        root   /var/www/html/error;
+    }
+    error_page   503 /serviceunavailable.html;
+    location = /serviceunavailable.html {
+        root   /var/www/html/error;
+    }
+    error_page   500 502 504  /internalservererror.html;
+    location = /internalservererror.html {
+        root   /var/www/html/error;
     }
 
     # pass the PHP scripts to FastCGI server listening

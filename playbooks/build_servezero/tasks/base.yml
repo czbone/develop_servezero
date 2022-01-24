@@ -78,12 +78,12 @@
 
 # copy error page file
 - name: make error page directory
-  file: path='{{ servezero_path }}/{{ servezero_share_volume }}/nginx/html/error' state=directory owner=root group=root mode=0755
-- copy: src='error/forbidden.html' dest='{{ servezero_path }}/{{ servezero_share_volume }}/nginx/html/error/forbidden.html' owner=root group=root mode=0644
-- copy: src='error/internalservererror.html' dest='{{ servezero_path }}/{{ servezero_share_volume }}/nginx/html/error/internalservererror.html' owner=root group=root mode=0644
-- copy: src='error/notfound.html' dest='{{ servezero_path }}/{{ servezero_share_volume }}/nginx/html/error/notfound.html' owner=root group=root mode=0644
-- copy: src='error/unauthorized.html' dest='{{ servezero_path }}/{{ servezero_share_volume }}/nginx/html/error/unauthorized.html' owner=root group=root mode=0644
-- copy: src='error/serviceunavailable.html' dest='{{ servezero_path }}/{{ servezero_share_volume }}/nginx/html/error/serviceunavailable.html' owner=root group=root mode=0644
+  file: path='{{ www_document_root }}/error' state=directory owner=root group=root mode=0755
+- copy: src='error/forbidden.html' dest='{{ www_document_root }}/error/forbidden.html' owner=root group=root mode=0644
+- copy: src='error/internalservererror.html' dest='{{ www_document_root }}/error/internalservererror.html' owner=root group=root mode=0644
+- copy: src='error/notfound.html' dest='{{ www_document_root }}/error/notfound.html' owner=root group=root mode=0644
+- copy: src='error/unauthorized.html' dest='{{ www_document_root }}/error/unauthorized.html' owner=root group=root mode=0644
+- copy: src='error/serviceunavailable.html' dest='{{ www_document_root }}/error/serviceunavailable.html' owner=root group=root mode=0644
 
 #
 # PHP用設定ファイル作成
