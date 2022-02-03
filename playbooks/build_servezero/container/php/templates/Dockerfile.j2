@@ -6,3 +6,17 @@ RUN docker-php-ext-install mysqli pdo pdo_mysql
 RUN apk --no-cache add tzdata && \
     cp /usr/share/zoneinfo/{{ docker_container_timezone }} /etc/localtime && \
     apk del tzdata
+
+# for WordPress
+RUN apt-get install -y \
+        libfreetype6-dev \
+        libjpeg62-turbo-dev \
+        libmcrypt-dev \
+        libpng-dev \
+        mailutils \
+        memcached \
+        msmtp \
+        msmtp-mta \
+        openssl \
+    && docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/ \
+    && docker-php-ext-install -j$(nproc) gd exif
