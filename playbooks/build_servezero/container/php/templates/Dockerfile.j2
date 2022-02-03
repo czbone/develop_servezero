@@ -8,5 +8,5 @@ RUN apk --no-cache add tzdata && \
     apk del tzdata
 
 # for WordPress
-RUN docker-php-ext-install exif zip
+RUN docker-php-ext-install zip
 
