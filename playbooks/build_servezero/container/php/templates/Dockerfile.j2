@@ -7,7 +7,9 @@ RUN apk --no-cache add tzdata && \
     cp /usr/share/zoneinfo/{{ docker_container_timezone }} /etc/localtime && \
     apk del tzdata
 
-# for WordPress
+#################################
+# PHP option for WordPress
+#################################
 # install the PHP extensions we need (https://make.wordpress.org/hosting/handbook/handbook/server-environment/#php-extensions)
 RUN set -ex; \
 	\
@@ -62,4 +64,3 @@ RUN set -ex; \
 # check for output like "PHP Warning:  PHP Startup: Unable to load dynamic library 'foo' (tried: ...)
 	err="$(php --version 3>&1 1>&2 2>&3)"; \
 	[ -z "$err" ]
-
