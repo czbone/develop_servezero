@@ -48,14 +48,14 @@
 
 - name: Create ServeZero service
   template:
-    src: {{ servezero_system_name }}.service.j2
+    src: '{{ servezero_system_name }}'.service.j2
     dest: /lib/systemd/system/{{ servezero_system_name }}.service
-    mode: 644
+    mode: 0644
   notify: Restart ServeZero
-# - name: Start ServeZero service
-#   systemd:
-#     name: '{{ servezero_system_name }}'
-#     state: restarted
-#     daemon_reload: yes
-#     enabled: yes
-    
+- name: Start ServeZero service
+  systemd:
+    name: '{{ servezero_system_name }}'
+  #  state: restarted
+    state: started
+    daemon_reload: yes
+    enabled: yes
