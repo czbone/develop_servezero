@@ -1,0 +1,4 @@
+- name: Restart ServeZero
+  service:
+    name: '{{ servezero_system_name }}'
+    state: restarted
