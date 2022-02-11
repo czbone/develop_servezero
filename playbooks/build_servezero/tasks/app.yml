@@ -50,7 +50,7 @@
   template:
     src: '{{ servezero_system_name }}'.service.j2
     dest: /lib/systemd/system/{{ servezero_system_name }}.service
-    mode: 0644
+    mode: '0644'
   notify: Restart ServeZero
 - name: Start ServeZero service
   systemd:
