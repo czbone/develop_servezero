@@ -55,7 +55,6 @@
 - name: Start ServeZero service
   systemd:
     name: '{{ servezero_system_name }}'
-  #  state: restarted
-  #  state: started
     daemon_reload: yes
     enabled: yes
+  notify: Restart ServeZero
