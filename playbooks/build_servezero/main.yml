@@ -44,9 +44,6 @@
   tasks:
     - include_tasks: tasks/app.yml
     - include_tasks: tasks/base.yml
-    # Must restart ServeZero. Because base environment is installed later.
-    # - name: Restart ServeZero service
-    #   service: name=servezero state=restarted enabled=yes
 
   handlers:
     - import_tasks: handlers/main.yml

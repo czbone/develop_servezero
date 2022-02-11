@@ -56,6 +56,6 @@
   systemd:
     name: '{{ servezero_system_name }}'
   #  state: restarted
-    state: started
+  #  state: started
     daemon_reload: yes
     enabled: yes
